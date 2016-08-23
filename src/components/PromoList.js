@@ -5,8 +5,13 @@ import _ from 'lodash';
 
 class PromoList extends Component {
     constructor (props) {
-        super()
-        this.state = { promos: [] }
+        super(props)
+        console.log(props)
+        this.state = { promos: [],
+                       filterVal: props.filterVal || 'justin-intl' 
+                    }
+        console.log(this.state.filterVal)
+
     }
     getPromos() {
         axios.get('http://10.5.18.225:1337/api/promos').then(function(results) {
@@ -22,7 +27,8 @@ class PromoList extends Component {
         });
     }
     render () {
-        var items = _.map(this.state.promos, (promo, index) =>  
+        var filteredItems = _.filter(this.state.promos, { 'promoKey': this.state.filterVal })
+        var items = _.map(filteredItems, (promo, index) =>  
             <PromoBlock key={index} {...promo} {...this.props } /> );
 
         return (

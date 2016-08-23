@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
 class FilterBar extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {};
+    }
     handleSubmit(event) {
         event.preventDefault()
-        console.log(this.refs.filterBar.value)
-        this.props.getPromos(this.refs.filterBar.value);
-        this.refs.filterBar.value = '';
+        this.props.filterInput(this.refs.filterBar.value)
     }
     render() {
         return (
