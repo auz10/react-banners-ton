@@ -6,9 +6,11 @@ class PromoBlock extends Component {
         return (
             <div className="result-panel">
                 <div className="panel panel-success">
-                    <div className="panel-heading">{this.props.head}</div>
+                    <div className="panel-heading">{this.props.promoKey}</div>
                         <div className="panel-body">
-                            {this.props.imagePath}
+                            <img src={this.props.imagePath} className="promo-image"/>
+                            <p>{this.props.head}</p>
+                            <p>{this.props.sell}</p>
                         </div>
                 </div>
             </div>
