@@ -6,15 +6,13 @@ import _ from 'lodash';
 class PromoList extends Component {
     constructor (props) {
         super(props)
-        console.log(props)
         this.state = { promos: [],
                        filterVal: props.filterVal || 'justin-intl' 
                     }
-        console.log(this.state.filterVal)
 
     }
     getPromos() {
-        axios.get('http://10.5.18.225:1337/api/promos').then(function(results) {
+        axios.get('http://localhost:1337/api/promos').then(function(results) {
             return results.data
         })
     }
