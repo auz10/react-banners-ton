@@ -35,7 +35,9 @@ body {
   margin: 0 auto;
   padding: 20px 0 0 0;
   margin-bottom: 20px;
-
+}
+.input-group input:hover {
+  border-color:#66afe9;
 }
 
 .result-panel {
@@ -43,11 +45,25 @@ body {
   width: 83%;
   text-align: left;
 }
+.panel-default {
+  cursor: pointer;
+}
+.panel-default:hover {
+  border-color:#92D3E8;
+}
+.panel-default:clicked {
+  border-color:#66afe9;
+}
 .panel-body {
   padding: 10px 15px;
 }
 .panel-heading {
   padding: 2px 15px;
+}
+.panel-heading span {
+  float: right;
+  font-size: 11px;
+  line-height: 22px;
 }
 .panel-default>.panel-heading {
   color: #555859;
@@ -61,4 +77,9 @@ body {
   height: 70px;
   float: left;
   margin-right: 10px;
+}
+
+.promo-image.lrg {
+  width: 120px;
+  height: 120px;
 }
