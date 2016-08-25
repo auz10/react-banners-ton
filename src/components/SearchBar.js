@@ -11,12 +11,13 @@ class FilterBar extends Component {
     }
     render() {
         return (
-            <form onSubmit={ this.handleSubmit.bind(this) }>
+            <form>
                 <div className="input-group input-group-lg col-lg-10">             
                 <input type="text" 
                        className="form-control" 
                        placeholder="Filter.."
                        ref="filterBar"
+                       onKeyUp={this.handleSubmit.bind(this)}
                 />
             </div>
             </form>

@@ -4,36 +4,40 @@ import axios from 'axios';
 import _ from 'lodash';
 
 class PromoList extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
-        this.state = { promos: [],
-                       filterVal: props.filterVal || 'justin-intl' 
-                    }
-
+        this.state = {
+            promos: []
+        }
     }
-    getPromos() {
-        axios.get('http://localhost:1337/api/promos').then(function(results) {
-            return results.data
-        })
-    }
-    componentDidMount () {
+    componentDidMount() {
         var this_ = this;
         axios
-           .get('http://10.5.18.225:1337/api/promos')
-           .then(function(results) {
-              this_.setState({promos: results.data})
-        });
+            .get('http://localhost:1337/api/promos')
+            .then(function (results) {
+                this_.setState({ promos: results.data })
+            });
     }
-    render () {
-        var filteredItems = _.filter(this.state.promos, { 'promoKey': this.state.filterVal })
-        var items = _.map(filteredItems, (promo, index) =>  
-            <PromoBlock key={index} {...promo} {...this.props } /> );
+    render() {
+        var filteredItems = this.searchPromos(this.props.filterVal, this.state.promos);
+        var items = _.map(filteredItems, (promo, index) =>
+            <PromoBlock key={index} {...promo} {...this.props } />);
 
         return (
-            <div>  
+            <div>
                 {items}
             </div>
         )
+    }
+    searchPromos(filter, promos) {
+        var re = new RegExp(filter);
+        var reItems = [];
+        for (var key in promos) {
+            if (re.test(promos[key].promoKey)) {
+                reItems.push(promos[key])
+            }
+        }
+        return reItems;
     }
 }
 
