@@ -15,7 +15,6 @@ class App extends Component {
     this.setState({ filterVal: value})    
   }
   render() {
-    console.log(this.state.filterVal)
     return (
       <div className="App">
         <div className="row">

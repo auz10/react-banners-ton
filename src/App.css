@@ -48,6 +48,9 @@ body {
 .panel-default {
   cursor: pointer;
 }
+.panel-default.clicked {
+  cursor: default;
+}
 .panel-default:hover {
   border-color:#92D3E8;
 }
@@ -68,18 +71,54 @@ body {
 .panel-default>.panel-heading {
   color: #555859;
 }
+
+.right-col {
+  display: inline-block;
+  vertical-align: top;
+  width: 88%;
+}
+.right-col.clicked {
+  width: 80%;
+}
 .panel-body p {
   margin-top: 8px;
   color: #555859;
 }
+
+.left-col {
+  display: inline-block;
+  width: 12%;
+}
+.left-col.clicked {
+  width: 20%;
+}
 .promo-image {
   width: 70px;
   height: 70px;
-  float: left;
-  margin-right: 10px;
 }
 
-.promo-image.lrg {
+.promo-image.active {
   width: 120px;
   height: 120px;
+}
+
+.right-col.clicked input {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.right-col .list-group-item {
+  padding: 4px 10px;
+  overflow-x: hidden;
+
+}
+.right-col .list-group-item .input-key {
+  width: 20%;
+  font-weight: bold;
+  display: inline-block;
+  
+}
+.list-group-item input {
+  width: 80%;
+  border: none;
 }

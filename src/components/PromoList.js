@@ -7,7 +7,8 @@ class PromoList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            promos: []
+            promos: [],
+            done: false
         }
     }
     componentDidMount() {
@@ -22,7 +23,6 @@ class PromoList extends Component {
         var filteredItems = this.searchPromos(this.props.filterVal, this.state.promos);
         var items = _.map(filteredItems, (promo, index) =>
             <PromoBlock key={index} {...promo} {...this.props } />);
-
         return (
             <div>
                 {items}
