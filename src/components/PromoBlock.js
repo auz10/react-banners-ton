@@ -1,79 +1,79 @@
 import React, { Component } from 'react';
 
 class PromoBlock extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            active: false
-        };
+    constructor(){
+        super()
+        this.state = { active: true }
     }
-    handleClick () {
-        this.setState({ active: !this.state.active })
+    switchActive () {
+        this.setState({ active: !this.state.active });
     }
-    handleInputSave (event) {
-        event.preventDefault()
+    renderPromoInfo () {
+        if(this.state.active) {
+            return <PromoInfo>
+                <InfoItem typeText="Head" defaultValue={this.props.head}/>
+                <InfoItem typeText="Sell" defaultValue={this.props.sell}/>
+                <InfoItem typeText="CTA" defaultValue={this.props.cta}/>
+                <InfoItem typeText="URL" defaultValue={this.props.url}/>
+                <InfoItem typeText="Image" defaultValue={this.props.imagePath}/>
+            </PromoInfo>
+        }
     }
-    handleChange() {
-        this.setState({ 
-            head: this.refs.headInput.value,
-            sell: this.refs.sellInput.value,
-            cta: this.refs.ctaInput.value,
-            url: this.refs.urlInput.value,
-            image: this.refs.imageInput.value
-        })
-    }
-    isActive (value) {
-        return (value === this.state.active) ? 'clicked' : '';
-    }
-    renderBody() {  
+    render () {
         return (
-            <div className="panel panel-default {this.isActive(true)}">
-                <div className="panel-heading" onClick={this.handleClick.bind(this)}>{this.props.promoKey}<span>{this.props.channel.join('/')}</span></div>
-                <div className="panel-body">
-                    <div className="left-col {this.isActive(true)}">
-                        <img src={this.props.imagePath} className="promo-image {this.isActive(true)}" alt={this.props.name} />
-                    </div>
-                    <div className="right-col {this.isActive(true)}">
-                        <ul className="list-group">
-                            <InfoListItem typeText="Head" defaultValue={this.props.head} onChange={this.handleChange.bind(this)} active={this.state.active}/>
-                            <InfoListItem typeText="Sell" defaultValue={this.props.sell} onChange={this.handleChange.bind(this)} active={this.state.active}/>
-                            <InfoListItem typeText="CTA" defaultValue={this.props.cta} onChange={this.handleChange.bind(this)} active={this.state.active}/>
-                            <InfoListItem typeText="URL" defaultValue={this.props.url} onChange={this.handleChange.bind(this)} active={this.state.active}/>
-                            <InfoListItem typeText="Image" defaultValue={this.props.imagePath} onChange={this.handleChange.bind(this)} active={this.state.active}/>
-                        </ul>
-                    </div>
+            <div className="result-panel">
+                <div className="panel panel-default">
+                    <PromoHeading onClick={console.log(1)}>
+                        {this.props.promoKey}
+                        <span>{this.props.channel.join('/')}</span>
+                    </PromoHeading>
+                    <PromoBody active={this.state.active}>
+                        <PromoImage image={this.props.imagePath} alt={this.props.name}/>
+                        {this.renderPromoInfo()}
+                    </PromoBody>
                 </div>
             </div>
         )
     }
+}
+
+class PromoBody extends Component {
     render () {
-        console.log(this.state.active)
+        var body;
+        if(this.props.active) {
+            body = <div className="panel-body">{this.props.children}</div>
+        }
         return (
-            <div className="result-panel">
-                {this.renderBody()}
-            </div>
-        );
+            <div>{body}</div>
+        )
     }
 }
 
-class InfoListItem extends Component {
-    render () {
-        var text = this.props.defaultValue
-        if (this.props.active) {
-            text = <input defaultValue={this.props.defaultValue}
-                onChange={this.props.handleChange}
-                ref={this.props.ref}
-            />
-        } else {
-            text = this.props.defaultValue
-        }
-        return (
-            <li className="list-group-item">
-                <div className="input-key">{this.props.typeText}</div>
-                {text}
-            </li>
-        );
-    }
-}
+const PromoHeading = (props) => (
+    <div className="panel-heading">
+        {props.children}
+    </div>
+);
+
+const PromoImage = (props) => (
+    <div className="left-col">
+        <img src={props.image} className="promo-image" alt={props.alt} />
+    </div>
+);
+
+const PromoInfo = (props) => (
+    <div className="right-col">
+        <ul className="list-group">
+            {props.children}
+        </ul>
+    </div>
+);
+
+const InfoItem = (props) => (
+    <li className="list-group-item">
+        <div className="input-key">{props.typeText}</div>
+        {props.defaultValue}
+    </li>
+);
 
 export default PromoBlock;
