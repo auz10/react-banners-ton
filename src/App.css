@@ -118,7 +118,18 @@ body {
   display: inline-block;
   
 }
+
+.right-col .form-control {
+  font-size: 14px;
+  height: 25px;
+  border: 0px;
+}
+
 .list-group-item input {
   width: 80%;
   border: none;
+}
+
+.save-btn {
+  float: right
 }
